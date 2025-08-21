@@ -1,0 +1,11 @@
+from item import Item
+from phone import Phone
+
+Item.instantiate_from_csv()
+
+# Read only parameter (name)
+item1 = Item("Myitem", 300)
+
+# New name for the parameter
+item1.name = "Newitemname"
+print(item1.name)

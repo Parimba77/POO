@@ -6,16 +6,27 @@ class Item():
     def __init__(self,name: str, price: float, quantity=1):
         # Validantion of parameter
         assert price >= 0, f"Price must be greater or equal to 0, got {price}"
-        
         assert quantity >= 0, f"Quantity must be greater or equal to 0, got {quantity}"
         
         #Putting parameters for every instance
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         
         Item.all.append(self)
         
+    # Property attribue, read only
+    @property
+    def name(self):
+        return self.__name
+    
+    # Putting the read only parameter to a value so you can modify it.
+    @name.setter
+    def name(self,value):
+        if len(value) > 15:
+            raise Exception("Name too longe!")
+        else:
+            self.__name = value
     
     #Executives
     def calculate_price(self):
@@ -26,7 +37,7 @@ class Item():
         
     #Reading the csv file
     @classmethod    
-    def instantiate_from_csv(cls, ):
+    def instantiate_from_csv(cls):
         with open ("items.csv", "r") as f:
             reader = csv.DictReader(f)
             items = list(reader)
@@ -52,10 +63,5 @@ class Item():
             return False
         
     def __repr__(self):
-        return f"Item('{self.name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
-class Phone(Item):
-    pass
-
-phone1 = Phone("jPhone", 1000, 5)
-phone2 = Phone("jPhone", 2000, 5)
