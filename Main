@@ -1,11 +1,7 @@
-from item import Item
 from phone import Phone
 
-Item.instantiate_from_csv()
-
 # Read only parameter (name)
-item1 = Item("Myitem", 300)
+item1 = Phone("Myitem", 300, 4)
 
-# New name for the parameter
-item1.name = "Newitemname"
-print(item1.name)
+item1.send_email()
+
